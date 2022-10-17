@@ -1,0 +1,45 @@
+Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+
+You must implement a solution with a linear runtime complexity and use only constant extra space.
+
+Input: nums = [4,1,2,1,2]
+Output: 4
+
+###
+
+Bit Manipulation / Get the binary representation of input values then XOR them all together and the result will be the single value.
+
+XOR: 
+- if we XOR the same numbers then output is [ 0 ] 
+- if we XOR different numbers then output is [ 1 ]
+    - 0 ^ 0 = 0
+    - 0 ^ 1 = 1
+- can be done in any order resulting in same output
+- XOR with [ 0 ] does not change the result
+    - n ^ 0 = n
+    - 1 ^ 0 = 1
+    - 0 ^ 0 = 0
+    
+[ 4,  ... 1 0 0
+  1,  ... 0 0 1
+  2,  ... 0 1 0
+  1,  ... 0 0 1
+  2   ... 0 1 0
+]
+
+if we XOR [ 0 1 0 ] in index 2 
+     with [ 0 1 0 ] in index 4 then output will be 
+          [ 0 0 0 ] because they're the same and they cancel out.
+          
+if we XOR [ 0 0 1 ] in index 1 
+     with [ 0 0 1 ] in index 3 then output will be 
+          [ 0 0 0 ] because they're the same and they cancel out.
+          
+then we're left with [ 1 0 0 ] which is the answer. The order of XOR doesn't matter, will always result in the same answer.
+
+
+def singleNumber(self, nums):
+    o = 0
+    for n in nums:
+        o ^= n
+    return o
