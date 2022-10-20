@@ -1,10 +1,74 @@
 =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+~=~= 191 ~ Number of 1 Bits ~=~=
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+
+Bitwise Operator [ & ]:
+- ANDing [ 1 ] with [ 1 ] results in [ 1 ] otherwise it's a [ 0 ], ANDing a number with [ 1 ] is helpful to distinguish if a number is a [ 1 ] or [ 0 ].
+
+Modding by 2:
+- ( n % 2 ) is taking a number, dividing it by 2 and taking the remainder is helpful to distinguish if a number is a [ 1 ] or [ 0 ].
+    - 0 % 2 = 0
+    - 1 % 2 = 1
+
+Next bit of a number:
+- By taking a number and shifting it right by [ 1 ] ( more efficient on CPU ).
+    - n = n >> 1
+- By taking a number and dividing it by [ 2 ].
+    - n = n / 2
+
+Write a function that takes an unsigned integer and returns the number of '1' bits it has (also known as the Hamming weight).
+The Hamming weight of a string is the number of symbols that are different from the zero-symbol of the alphabet used. 
+Note:
+    Note that in some languages, such as Java, there is no unsigned integer type. 
+    In this case, the input will be given as a signed integer type. It should not affect your implementation, 
+    as the integer's internal binary representation is the same, whether it is signed or unsigned.
+    In Java, the compiler represents the signed integers using 2's complement notation. Therefore, in the Example,
+    the input represents the signed integer. -3.
+    
+Input: n = 11111111111111111111111111111101
+Output: 31
+
+######################################
+Starting with the rightmost bit, use
+AND or Mod to check if it's a 1 or 0.
+Shift bits to the right or divide by
+2 to check the next bits.
+######################################
+
+    1101        110         11          1 
+ &  0001     &  001       & 01        & 1
+    0001        000         01          1
+    
+    
+    
+count = 0
+while n:
+    count += (n % 2)
+    n = n >> 1
+return count
+======================================
+count = 0
+while n:
+    count += ( (n % 10) & 1 )
+    n = n >> 1
+return count
+======================================
+count = 0
+while n:
+    if ( n % 2 == 1 ):
+        count += 1
+    n /= 2
+return count
+
+
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
 ~=~=~ 136 ~ Single Number ~=~=~=
 =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
 
 XOR: 
 - XORing values in any order does not affect the output
-- XORing **SAME** numbers outputs [ 0 ] 
+- XORing the **SAME**  numbers outputs [ 0 ] 
 - XORing **DIFFERENT** numbers outputs [ 1 ]
     - 0 ^ 0 = 0
     - 1 ^ 1 = 0
